@@ -1,0 +1,32 @@
+html {
+  font-family: CavierDreams, arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navbar {
+  background-color: white;
+  height: 5vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 2vh;
+}
+
+.navbar a{
+  color: black;
+}
+
+.navbar table td{
+  text-align: center;
+  width: 100vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+.navbar td:hover{
+  background-color: #dcf0fa;
+  border-radius: 2vh;
+  font-size: 2.05vh;
+}

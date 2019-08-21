@@ -5,17 +5,20 @@
 <body>
   <?php
     include('functions/DatabaseFunc.php');
-
-    session_start();
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    logIn($username, $password);
-
     include('Navbar.php');
 
-
-
   ?>
+
+  <table>
+    <tr>
+      <th>Benutzer</th>
+      <th>Credits</th>
+    </tr>
+    <?php
+      listUsers();
+    ?>
+  </table>
+
+
 </body>
 </html>

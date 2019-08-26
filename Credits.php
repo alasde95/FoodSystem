@@ -5,51 +5,26 @@
 <body>
   <?php
     include('functions/DatabaseFunc.php');
+    include('functions/Functions.php');
     include('Navbar.php');
   ?>
 
     <?php
+      //offene Credit Buchungen abholen
       $openBookings = getOpenBookings();
-
       //Wenn eine offene Buchung bestätigt wurde, wird diese in der DB bestätigt
       if(isset($_POST['checkedBooking'])){
         $bookingId = (int)$_POST['checkedBooking'];
         checkBooking($bookingId);
       }
-
+      //Zeige Offene Buchungen an weil welche Vorhanden sind
       if(is_array($openBookings)){
         //offene Buchungen anzeigen
-    ?>
-        <table>
-          <tr>
-            <th>
-              Mitarbeiter
-            </th>
-            <th>
-              Artikel
-            </th>
-            <th>
-              Credits
-            </th>
-          </tr>
-    <?php
-        foreach($openBookings as $booking){
-          echo
-            "<tr>
-              <form action=\"Credits.php\" method=\"post\">
-                <td>".$booking['username']."</td>
-                <td>".$booking['article']."</td>
-                <td>".$booking['credits']."</td>
-                <td><input type=\"hidden\" name=\"checkedBooking\" value=\"".$booking['id']."\"></td>
-                <td><input type=\"submit\" value=\"bestätigen\"></td>
-              </form>
-            </tr>";
-        }
+        showOpenBookings($openBookings);
       }
-     ?>
-  </table>
-  <br>
+    ?>
 
+  <br>
 
   <form action="Credits.php" method="post">
     <select name="booking">

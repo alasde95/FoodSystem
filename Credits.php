@@ -7,8 +7,19 @@
     include('functions/DatabaseFunc.php');
     include('Navbar.php');
 
-    $openBookings = showOpenBookings();
+    $openBookings = getOpenBookings();
+
+    if(is_array($openBookings)){
+      echo
+        "<table>
+          <tr>
+            <th>User</th>
+            <th>Artikel</th>
+            <th>Credits</th>
+          </tr>";
+    }
   ?>
+
   <table>
     <tr>
       <th>

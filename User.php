@@ -9,7 +9,6 @@
   <form action="User.php" method="post">
     <input type="text" name="username"> <br>
     <input type="password" name="password"><br>
-    <input type="checkbox" name="admin">admin<br>
     <input type="submit" value="absenden">
   </form>
 

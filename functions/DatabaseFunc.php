@@ -93,6 +93,15 @@
         $openBookings[$i] = $row;
         $i++;
     }
-    return $openBookings;
+    if(isset($openBookings)){
+      return $openBookings;
+    }
+  }
+
+  function checkBooking($booking){
+    $conn = openDB();
+    $id = $booking;
+    $sql = "UPDATE history SET checked = 1 WHERE id = $id";
+    $result = $conn->query($sql);
   }
 ?>

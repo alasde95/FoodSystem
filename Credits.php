@@ -6,35 +6,45 @@
   <?php
     include('functions/DatabaseFunc.php');
     include('Navbar.php');
-
-    $openBookings = getOpenBookings();
-
-    if(is_array($openBookings)){
-      echo
-        "<table>
-          <tr>
-            <th>User</th>
-            <th>Artikel</th>
-            <th>Credits</th>
-          </tr>";
-    }
   ?>
 
-  <table>
-    <tr>
-      <th>
-        Mitarbeiter
-      </th>
-      <th>
-        Artikel
-      </th>
-      <th>
-        Credits
-      </th>
-    </tr>
     <?php
-      foreach($openBookings as $booking){
-        echo "<tr><td>".$booking['username']."</td><td>".$booking['article']."</td><td>".$booking['credits']."</td><td><input</tr>";
+      $openBookings = getOpenBookings();
+
+      //Wenn eine offene Buchung bestätigt wurde, wird diese in der DB bestätigt
+      if(isset($_POST['checkedBooking'])){
+        $bookingId = (int)$_POST['checkedBooking'];
+        checkBooking($bookingId);
+      }
+
+      if(is_array($openBookings)){
+        //offene Buchungen anzeigen
+    ?>
+        <table>
+          <tr>
+            <th>
+              Mitarbeiter
+            </th>
+            <th>
+              Artikel
+            </th>
+            <th>
+              Credits
+            </th>
+          </tr>
+    <?php
+        foreach($openBookings as $booking){
+          echo
+            "<tr>
+              <form action=\"Credits.php\" method=\"post\">
+                <td>".$booking['username']."</td>
+                <td>".$booking['article']."</td>
+                <td>".$booking['credits']."</td>
+                <td><input type=\"hidden\" name=\"checkedBooking\" value=\"".$booking['id']."\"></td>
+                <td><input type=\"submit\" value=\"bestätigen\"></td>
+              </form>
+            </tr>";
+        }
       }
      ?>
   </table>

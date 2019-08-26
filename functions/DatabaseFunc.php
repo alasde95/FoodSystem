@@ -26,9 +26,10 @@
 
     if($result->num_rows > 0){
       $result = $result->fetch_assoc();
-      $_SESSION['login'] = true;
+      $login = true;
+      return $login;
     } else {
-      $_SESSION['login'] = false;
+      $login = false;
       echo "Falsche Zugangsdaten";
       exit;
     }
@@ -76,5 +77,54 @@
     $result = $conn->query($sql);
   }
 
+  function getArticles(){
+    // Create connection
+    $conn = new mysqli(DBSERVER, DBUSER, DBPASSWORD, DATABASE);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
+    $sql = "SELECT * FROM articles";
+    $result = $conn->query($sql);
+    $i = 0;
+    while($row = $result->fetch_assoc()) {
+        $articles[$i] = $row;
+        $i++;
+    }
+    return $articles;
+
+  }
+
+  function bookCredits($booking, $username){
+    $booking = explode(" ", $booking);
+    // Create connection
+    $conn = new mysqli(DBSERVER, DBUSER, DBPASSWORD, DATABASE);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO history (username, article, credits) VALUES ('$username', '$booking[0]', $booking[1])";
+    $result = $conn->query($sql);
+
+  }
+
+  function showOpenBookings(){
+    // Create connection
+    $conn = new mysqli(DBSERVER, DBUSER, DBPASSWORD, DATABASE);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM history WHERE checked = 0";
+    $result = $conn->query($sql);
+    $i = 0;
+    while($row = $result->fetch_assoc()) {
+        $openBookings[$i] = $row;
+        $i++;
+    }
+    return $openBookings;
+  }
 ?>

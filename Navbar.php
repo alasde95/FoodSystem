@@ -17,7 +17,7 @@
     <td>
       <a href="Credits.php">
         <div>
-          Credits
+          Credits buchen
         </div>
       </a>
     </td>
